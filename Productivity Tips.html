@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Tips</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .tip-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #667eea;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tip-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #555;
+            font-style: italic;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .tip-number {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💡 Productivity Tips</h1>
+        <div class="tip-container">
+            <div class="tip-text" id="tipText">Click the button below to get a random productivity tip!</div>
+        </div>
+        <button class="btn" onclick="showRandomTip()">Get New Tip</button>
+        <div class="tip-number" id="tipNumber"></div>
+    </div>
+
+    <script>
+        const productivityTips = [
+            "Use the Pomodoro Technique: Work for 25 minutes, then take a 5-minute break.",
+            "Start your day by tackling the most important task first (eat the frog).",
+            "Keep a clean and organized workspace to reduce distractions.",
+            "Use the two-minute rule: If something takes less than 2 minutes, do it now.",
+            "Batch similar tasks together to maintain focus and efficiency.",
+            "Turn off non-essential notifications during focused work time.",
+            "Plan your day the night before to hit the ground running.",
+            "Use time-blocking to allocate specific time slots for different activities.",
+            "Take regular breaks to maintain energy and prevent burnout.",
+            "Create templates for recurring tasks to save time.",
+            "Use keyboard shortcuts to speed up common computer tasks.",
+            "Delegate tasks that others can do, freeing you for higher-value work.",
+            "Set specific goals and deadlines to create urgency and focus.",
+            "Use the 80/20 rule: Focus on the 20% of tasks that yield 80% of results.",
+            "Minimize multitasking - focus on one task at a time for better quality.",
+            "Create a daily routine to automate decision-making for routine tasks.",
+            "Use a task management system to track and prioritize your work.",
+            "Learn to say 'no' to commitments that don't align with your goals.",
+            "Review and reflect on your productivity weekly to identify improvements.",
+            "Invest in learning new skills that can make you more efficient.",
+            "Use natural light and maintain good posture to stay alert and comfortable.",
+            "Prepare everything you need before starting a task to avoid interruptions.",
+            "Set artificial deadlines before real ones to build in buffer time.",
+            "Use the 'Getting Things Done' method: capture, clarify, organize, reflect, engage.",
+            "Eliminate or reduce time-wasting activities like excessive social media."
+        ];
+
+        let currentTipIndex = -1;
+
+        function showRandomTip() {
+            // Get a random tip that's different from the current one
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * productivityTips.length);
+            } while (randomIndex === currentTipIndex && productivityTips.length > 1);
+            
+            currentTipIndex = randomIndex;
+            
+            const tipText = document.getElementById('tipText');
+            const tipNumber = document.getElementById('tipNumber');
+            
+            // Add fade effect
+            tipText.classList.remove('fade-in');
+            setTimeout(() => {
+                tipText.textContent = productivityTips[currentTipIndex];
+                tipNumber.textContent = `Tip ${currentTipIndex + 1} of ${productivityTips.length}`;
+                tipText.classList.add('fade-in');
+            }, 100);
+        }
+
+        // Show initial tip on page load
+        window.onload = function() {
+            showRandomTip();
+        };
+    </script>
+</body>
+</html>
